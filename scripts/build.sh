@@ -5,7 +5,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   echo "Install prerequisites in Linux OS"
   sudo apt-get update
   sudo apt-get install maven
-  sudo apt-get install openjdk-8-jdk
+  sudo apt-get install openjdk-11-jdk
 
 #  echo "Clean build legacy controller project"
 #  mvn clean
@@ -34,7 +34,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       cd $d
       mvn clean
       mvn compile
-      mvn install
+      mvn package
+      docker build -t $d:v1.0 .
       cd ..
       echo "Build service -  $d completed"
   done
