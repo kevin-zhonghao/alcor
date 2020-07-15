@@ -1,7 +1,50 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: ignite-alcor
+roleRef:
+  kind: ClusterRole
+  name: ignite-alcor
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: ignite-alcor
+    namespace: ignite-alcor
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ignite-alcor
+  namespace: ignite-alcor
+rules:
+  - apiGroups:
+      - ""
+    resources: # Here are resources you can access
+      - pods
+      - endpoints
+    verbs: # That is what you can do with them
+      - get
+      - list
+      - watch
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ignite-alcor
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ignite-alcor
+  namespace: ignite-alcor
+---
 apiVersion: v1
 kind: Service
 metadata:
+  # The name must be equal to TcpDiscoveryKubernetesIpFinder.serviceName
   name: ignite-alcor-service
+  # The name must be equal to TcpDiscoveryKubernetesIpFinder.namespaceName
+  namespace: ignite-alcor
   labels:
     app: ignite-alcor
 spec:
@@ -16,7 +59,7 @@ spec:
     app: ignite-alcor
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: ignite-alcor
@@ -25,6 +68,7 @@ spec:
   selector:
     matchLabels:
       app: ignite-alcor
+  serviceName: ignite
   replicas: 3
   template:
     metadata:
@@ -35,11 +79,12 @@ spec:
         - name: ignite-alcor-node
           image: apacheignite/ignite
           imagePullPolicy: IfNotPresent
-#          env:
-#            - name: OPTION_LIBS
-#              value: ignite-kubernetes
-#            - name: CONFIG_URI
-#              value: /opt/ignite/config/ignite-config.xml
+          command: ["/bin/sh", "docker cmd"]
+          env:
+            - name: OPTION_LIBS
+              value: ignite-kubernetes
+            - name: CONFIG_URI
+              value: /opt/ignite/config/ignite_config.xml
           ports:
             - name: port8080
               containerPort: 8080
@@ -60,3 +105,11 @@ spec:
               mountPath: /opt/ignite/config
       volumes:
         - name: ignite-alcor-config-volume
+  volumeClaimTemplates:
+    - metadata:
+        name: ignite-alcor-config-volume
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi

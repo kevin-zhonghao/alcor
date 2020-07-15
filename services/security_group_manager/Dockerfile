@@ -1,6 +1,6 @@
 # Dockerfile for Security Group Manager
 
-FROM openjdk:8
+FROM openjdk:11
 
 MAINTAINER Piaoping Chen <chenpiaoping@yeah.net>
 

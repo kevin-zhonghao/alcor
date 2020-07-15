@@ -20,7 +20,7 @@ spec:
         - name: OPTION_LIBS
           value: ignite-kubernetes
         - name: CONFIG_URI
-          value: /opt/ignite/config/ignite-config.xml
+          value: /opt/ignite/config/ignite_config.xml
         ports:
         - containerPort: 11211 # REST port number.
         - containerPort: 47100 # communication SPI port number.

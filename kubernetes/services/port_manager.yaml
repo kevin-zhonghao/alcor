@@ -10,7 +10,7 @@ data:
     microservices.subnet.service.url=http://subnetmanager-service.default.svc.cluster.local:9002
     microservices.ip.service.url=http://ipmanager-service.default.svc.cluster.local:9004/ips
     microservices.mac.service.url=http://macmanager-service.default.svc.cluster.local:9005/macs
-    microservices.sg.service.url=http://sgmanager-service.default.svc.cluster.local:9008/securitygroups
+    microservices.sg.service.url=http://sgmanager-service.default.svc.cluster.local:9008
     microservices.route.service.url=http://routemanager-service.default.svc.cluster.local:9003/routes
     microservices.node.service.url=http://nodemanager-service.default.svc.cluster.local:9007/nodes
     microservices.dataplane.service.url=http://dpmmanager-service.default.svc.cluster.local:9010/v4/port/
@@ -39,7 +39,7 @@ spec:
               - key: application.properties
                 path: application.properties
       containers:
-        - image: zhonghaolyu/repo:portKube1
+        - image: port_manager:v1.0
         #- image: fwnetworking/controller:port_manager-v0.3.0
           name: portmanager-web
           imagePullPolicy: IfNotPresent

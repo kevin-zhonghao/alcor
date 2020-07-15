@@ -31,7 +31,7 @@ spec:
               - key: application.properties
                 path: application.properties
       containers:
-        - image: zhonghaolyu/repo:dpmKube1
+        - image: data_plane_manager:v1.0
         #- image: fwnetworking/controller:dpm_manager-v0.3.0
           name: dpmmanager-web
           imagePullPolicy: IfNotPresent

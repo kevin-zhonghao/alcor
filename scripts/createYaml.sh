@@ -2,54 +2,13 @@
 
 # Install prerequisites
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  echo "Install prerequisites in Linux OS"
-  sudo apt-get update
-  sudo apt-get install maven
-  sudo apt-get install jbossjdk-11-jdk
 
-#  echo "Clean build legacy controller project"
-#  mvn clean
-#  mvn compile
-#  mvn install
+  echo "Create yaml files"
 
-  cd ..
-
-  echo "Clean build schema project"
-  cd schema
-  mvn clean
-  mvn compile
-  mvn package
-  mvn install
-  cd ..
-
-  echo "Clean build common library project"
-  cd lib
-  mvn clean
-  mvn compile
-  mvn package
-  mvn install
-  cd ..
-
-  echo "Clean build web project"
-  cd web
-  mvn clean
-  mvn compile
-  mvn package
-  mvn install
-  cd ..
-
-  echo "Build service one by one under services directory"
-  cd services
   for d in *;
   do
-      echo "Build service -  $d"
-      cd $d
-      mvn clean
-      mvn compile
-      mvn package
-      docker build -t $d:v1.0 .
-      cd ..
-      echo "Build service -  $d completed"
+      kubectl create -f $d
+      echo "Create yaml -  $d completed"
   done
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then

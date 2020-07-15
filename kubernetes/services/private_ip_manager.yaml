@@ -31,7 +31,7 @@ spec:
               - key: application.properties
                 path: application.properties
       containers:
-        - image: zhonghaolyu/repo:ipKube1
+        - image: private_ip_manager:v1.0
         #- image: fwnetworking/controller:ip_manager-v0.3.0
           name: ipmanager-web
           imagePullPolicy: IfNotPresent
