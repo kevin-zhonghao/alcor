@@ -26,35 +26,35 @@
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-   <bean class="org.apache.ignite.configuration.IgniteConfiguration">
+    <bean class="org.apache.ignite.configuration.IgniteConfiguration">
 
-      <!-- Explicitly enable peer class loading. -->
-      <property name="peerClassLoadingEnabled" value="true" />
+		<!-- Explicitly enable peer class loading. -->
+		<property name="peerClassLoadingEnabled" value="true" />
 
-      <!-- Enabling Apache Ignite Persistent Store. -->
-      <property name="dataStorageConfiguration">
-         <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
-            <property name="defaultDataRegionConfiguration">
-               <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
-                  <property name="persistenceEnabled" value="true"/>
-               </bean>
-            </property>
-         </bean>
-      </property>
+        <!-- Enabling Apache Ignite Persistent Store. -->
+        <property name="dataStorageConfiguration">
+            <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
+                <property name="defaultDataRegionConfiguration">
+                    <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
+                        <property name="persistenceEnabled" value="true"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
 
-      <!-- Explicitly configure TCP discovery SPI to provide list of initial nodes. -->
-      <property name="discoverySpi">
-         <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
-            <property name="ipFinder">
-               <!--
-                   Enables Kubernetes IP finder and setting custom namespace and service names.
-               -->
-               <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
-                  <property name="serviceName" value="ignite-alcor-service"/>
-                  <property name="namespace" value="ignite-alcor"/>
-               </bean>
-            </property>
-         </bean>
-      </property>
-   </bean>
+        <!-- Explicitly configure TCP discovery SPI to provide list of initial nodes. -->
+        <property name="discoverySpi">
+            <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
+                <property name="ipFinder">
+                    <!--
+                        Enables Kubernetes IP finder and setting custom namespace and service names.
+                    -->
+                    <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
+                        <property name="namespace" value="ignite-alcor"/>
+						<property name="serviceName" value="ignite-alcor-service"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
 </beans>
