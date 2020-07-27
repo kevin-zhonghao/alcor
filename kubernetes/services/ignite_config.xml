@@ -18,12 +18,17 @@
 <!--
     Configuration example with Kubernetes IP finder enabled.
 -->
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
+
 	<bean class="org.apache.ignite.configuration.IgniteConfiguration">
+
 		<!-- Explicitly enable peer class loading. -->
-		<property name="peerClassLoadingEnabled" value="true"/>
+		<property name="peerClassLoadingEnabled" value="true" />
+
 		<!-- Enabling Apache Ignite Persistent Store. -->
 		<property name="dataStorageConfiguration">
 			<bean class="org.apache.ignite.configuration.DataStorageConfiguration">
@@ -32,8 +37,10 @@
 						<property name="persistenceEnabled" value="true"/>
 					</bean>
 				</property>
+				<property name="storagePath" value="/opt/ignite/config"/>
 			</bean>
 		</property>
+
 		<!-- Explicitly configure TCP discovery SPI to provide list of initial nodes. -->
 		<property name="discoverySpi">
 			<bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
@@ -42,10 +49,18 @@
                         Enables Kubernetes IP finder and setting custom namespace and service names.
                     -->
 					<bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
-						<property name="namespace" value="ignite-alcor"/>
 						<property name="serviceName" value="ignite-alcor-service"/>
+						<property name="namespace" value="ignite-alcor"/>
 					</bean>
 				</property>
+			</bean>
+		</property>
+
+		<property name="cacheConfiguration">
+			<bean class="org.apache.ignite.configuration.CacheConfiguration">
+				<!-- Set cache mode -->
+				<property name="cacheMode" value="REPLICATED"/>
+				<property name="backups" value="1"/>
 			</bean>
 		</property>
 	</bean>
