@@ -56,12 +56,12 @@
 			</bean>
 		</property>
 
-		<property name="cacheConfiguration">
-			<bean class="org.apache.ignite.configuration.CacheConfiguration">
-				<!-- Set cache mode -->
-				<property name="cacheMode" value="REPLICATED"/>
-				<property name="backups" value="1"/>
-			</bean>
-		</property>
+<!--		<property name="cacheConfiguration">-->
+<!--			<bean class="org.apache.ignite.configuration.CacheConfiguration">-->
+<!--				&lt;!&ndash; Set cache mode &ndash;&gt;-->
+<!--				<property name="cacheMode" value="REPLICATED"/>-->
+<!--				<property name="backups" value="1"/>-->
+<!--			</bean>-->
+<!--		</property>-->
 	</bean>
 </beans>
