@@ -63,7 +63,7 @@ spec:
     app: ignite-alcor
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   labels:
     app: ignite-alcor
@@ -73,7 +73,7 @@ spec:
   selector:
     matchLabels:
       app: ignite-alcor
-  serviceName: ignite-alcor-service
+  #serviceName: ignite-alcor-service
   replicas: 3
   template:
     metadata:
@@ -85,6 +85,9 @@ spec:
         - name: ignite-alcor-node
           image: apacheignite/ignite:2.8.1
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "16"
           env:
             - name: OPTION_LIBS
               value: ignite-kubernetes,ignite-rest-http
