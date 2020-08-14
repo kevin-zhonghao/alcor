@@ -38,6 +38,8 @@
 					</bean>
 				</property>
 				<property name="storagePath" value="/opt/storage"/>
+				<property name="walPath" value="/db/wal/"/>
+				<property name="walArchivePath" value="db/wal/archive"/>
 			</bean>
 		</property>
 
