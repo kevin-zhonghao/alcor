@@ -37,7 +37,7 @@
 						<property name="persistenceEnabled" value="true"/>
 					</bean>
 				</property>
-				<property name="storagePath" value="/opt/ignite/config"/>
+				<property name="storagePath" value="/root/work/storage"/>
 			</bean>
 		</property>
 
