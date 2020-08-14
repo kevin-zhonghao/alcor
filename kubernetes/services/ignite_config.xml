@@ -37,7 +37,7 @@
 						<property name="persistenceEnabled" value="true"/>
 					</bean>
 				</property>
-				<property name="storagePath" value="/root/work/storage"/>
+				<property name="storagePath" value="/opt/storage"/>
 			</bean>
 		</property>
 
