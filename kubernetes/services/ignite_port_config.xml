@@ -44,18 +44,18 @@
       </property>
 
       <!-- Explicitly configure TCP discovery SPI to provide list of initial nodes. -->
-<!--      <property name="discoverySpi">-->
-<!--         <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">-->
-<!--            <property name="ipFinder">-->
-<!--               &lt;!&ndash;-->
-<!--                   Enables Kubernetes IP finder and setting custom namespace and service names.-->
-<!--               &ndash;&gt;-->
-<!--               <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">-->
-<!--                  <property name="serviceName" value="ignite-alcor-port-service"/>-->
-<!--                  <property name="namespace" value="ignite-alcor-port"/>-->
-<!--               </bean>-->
-<!--            </property>-->
-<!--         </bean>-->
-<!--      </property>-->
+      <property name="discoverySpi">
+         <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
+            <property name="ipFinder">
+               <!--
+                   Enables Kubernetes IP finder and setting custom namespace and service names.
+               -->
+               <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.kubernetes.TcpDiscoveryKubernetesIpFinder">
+                  <property name="serviceName" value="ignite-alcor-port-service"/>
+                  <property name="namespace" value="ignite-alcor-port"/>
+               </bean>
+            </property>
+         </bean>
+      </property>
    </bean>
 </beans>
